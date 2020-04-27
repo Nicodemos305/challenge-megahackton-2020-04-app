@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { OverlayService } from '@app/core/services/overlay.service';
 import * as fromRoot from '@core/store/reducers';
 import { Store } from '@ngrx/store';
-import { selectRegisterLayout } from './reducers';
 import * as LoginActions from './actions/login.action';
+import { selectRegisterLayout } from './reducers';
+import { show } from '@app/core/store/actions/overlay.actions';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,11 @@ export class LoginPage implements OnInit {
 
   private nameControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
-  constructor(private fb: FormBuilder, private readonly store$: Store<fromRoot.State>) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly store$: Store<fromRoot.State>,
+    private overlayService: OverlayService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -63,6 +69,7 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit(): void {
+    this.store$.dispatch(show(null));
     console.log(this.authForm.value);
   }
 }
