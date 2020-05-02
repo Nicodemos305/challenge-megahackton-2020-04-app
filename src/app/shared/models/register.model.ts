@@ -1,3 +1,5 @@
-export class Register extends LoginRegisterBase {
+export class Register {
   name: string;
+  phone: string;
+  password: string;
 }

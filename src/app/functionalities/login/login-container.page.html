@@ -1,0 +1,14 @@
+<ion-app>
+  <ion-content
+    class="ion-padding ion-align-items-center ion-content"
+    *ngIf="(selectConfirmationLogin$ | async) as confirmation"
+  >
+    <div *ngIf="confirmation.showConfirmation; then confirm else login"></div>
+    <ng-template #login>
+      <app-login></app-login>
+    </ng-template>
+    <ng-template #confirm>
+      <app-confirmation [confirmation]="confirmation.confirmation"></app-confirmation>
+    </ng-template>
+  </ion-content>
+</ion-app>

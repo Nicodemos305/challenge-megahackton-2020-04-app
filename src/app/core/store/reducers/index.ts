@@ -1,6 +1,6 @@
 import { environment } from '@env/environment';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import * as fromLogin from '@app/auth/pages/login/reducers';
+import * as fromLogin from '@func/login/reducers';
 
 export interface State {
   login: fromLogin.State;

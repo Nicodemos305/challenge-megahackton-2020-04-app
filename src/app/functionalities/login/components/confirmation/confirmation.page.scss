@@ -1,0 +1,38 @@
+.center {
+  display: flex;
+  margin: 0 auto !important;
+  height: 100%;
+  justify-content: center;
+  background: var(--ion-color-primary); /*#78c055;*/
+}
+
+ion-card-content > ion-item {
+  max-width: 220px;
+  margin-bottom: 1em;
+}
+
+ion-card-content {
+  display: grid !important;
+  justify-content: center;
+  text-align: center;
+}
+
+ion-input {
+  letter-spacing: 0.5rem;
+  color: #78c055;
+  font-size: 2.5rem;
+}
+
+ion-text {
+  font-size: 1.3rem;
+}
+
+ion-text p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: inherit;
+}
+
+ion-icon {
+  font-size: 1.1rem;
+}

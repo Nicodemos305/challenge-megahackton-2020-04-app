@@ -1,0 +1,37 @@
+<ion-app class="center">
+  <ion-card class="ion-padding">
+    <ion-item>
+      <ion-text>
+        {{ confirmation.name }}, código de validação enviado para:
+        <p>
+          <ion-icon name="mail-unread-sharp" slot="start"></ion-icon>
+          {{ confirmation.phone | mask: '+00 (00) 00000-0000' }}
+        </p>
+      </ion-text>
+    </ion-item>
+
+    <ion-card-content>
+      <form [formGroup]="confirmForm" (submit)="onConfirmation()">
+        <ion-item class="ion-text-center">
+          <ion-input formControlName="code" autofocus="confirmation" maxlength="6"></ion-input>
+        </ion-item>
+        <ion-note color="danger" *ngIf="phone.touched && phone.hasError('required')">
+          Required
+        </ion-note>
+        <ion-note color="danger" *ngIf="phone.touched && phone.hasError('minlength')">
+          Min 3 characters
+        </ion-note>
+        <p>
+          <ion-button
+            expand="block"
+            color="tertiary"
+            type="submit"
+            [disabled]="confirmForm.invalid"
+          >
+            confirmar
+          </ion-button>
+        </p>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-app>

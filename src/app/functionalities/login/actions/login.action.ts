@@ -14,3 +14,23 @@ export const showRegisterLayout = createAction('[Login] Show Register layout');
 export const register = createAction('[Login] Register', props<{ register: Register }>());
 // submit user credential
 export const login = createAction('[Login] Login', props<{ login: Login }>());
+// login success
+export const loginSuccess = createAction('[Login] Login Success');
+// login redirect
+export const loginRedirect = createAction('[Login] Login Redirect');
+// logout
+export const logout = createAction('[Login] Logout');
+// logout success
+export const logoutSuccess = createAction('[Login] Logout Success');
+// confirmation register
+export const confirmationRegister = createAction(
+  '[Login] Confirmation Register',
+  props<{ confirmation: any }>()
+);
+// confirmation code
+export const confirmationCode = createAction(
+  '[Login] Confirmation Code',
+  props<{ confirm: any }>()
+);
+// confirmation success code
+export const successConfirmationCode = createAction('[Login] Success Confirmation Code');

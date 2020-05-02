@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { AlertOptions, LoadingOptions, ToastOptions } from '@ionic/core';
-import { Observable, from } from 'rxjs';
+import { Observable, from, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { OverlayOptions, OverlayEnum } from '../models/overlay.model';
 
@@ -9,11 +9,21 @@ import { OverlayOptions, OverlayEnum } from '../models/overlay.model';
   providedIn: 'root',
 })
 export class OverlayService {
+  loadingOverlay = new BehaviorSubject<boolean>(false);
+
   constructor(
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController
   ) {}
+
+  showLoaging(): void {
+    this.loadingOverlay.next(true);
+  }
+
+  hideLoaging(): void {
+    this.loadingOverlay.next(false);
+  }
 
   /**
    * Default method to show temporary mensage types: OverlayEnum
@@ -70,7 +80,7 @@ export class OverlayService {
     const toast = from(
       this.toastCtrl.create({
         position: 'bottom',
-        duration: 3000,
+        duration: 5000,
         buttons: [
           {
             text: 'OK',

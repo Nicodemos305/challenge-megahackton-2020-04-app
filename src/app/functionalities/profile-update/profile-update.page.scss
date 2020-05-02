@@ -1,0 +1,29 @@
+ion-thumbnail {
+  --ion-padding: 0px;
+  --size: 50px;
+  margin: 0.5rem;
+}
+
+ion-buttons ion-button {
+  font-size: 1.3rem;
+}
+
+.ion-toolbar-top {
+}
+
+ion-select {
+  display: contents;
+}
+
+form {
+  padding-top: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #4fafbb;
+  height: 100%;
+}
+
+ion-content {
+  --background: #4fafbb;
+}

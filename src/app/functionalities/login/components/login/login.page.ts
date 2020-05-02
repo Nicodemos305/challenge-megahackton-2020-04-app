@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { OverlayService } from '@app/core/services/overlay.service';
 import * as fromRoot from '@core/store/reducers';
 import { Store } from '@ngrx/store';
-import * as LoginActions from './actions/login.action';
-import { selectRegisterLayout } from './reducers';
-import { show } from '@app/core/store/actions/overlay.actions';
+import * as LoginActions from '../../actions/login.action';
+import { selectRegisterLayout, selectConfirmationLogin } from '../../reducers';
+import { Register } from '@app/shared/models/register.model';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +18,7 @@ export class LoginPage implements OnInit {
 
   private nameControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
-  constructor(
-    private fb: FormBuilder,
-    private readonly store$: Store<fromRoot.State>,
-    private overlayService: OverlayService
-  ) {}
+  constructor(private fb: FormBuilder, private readonly store$: Store<fromRoot.State>) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -31,7 +26,7 @@ export class LoginPage implements OnInit {
 
   private createForm(): void {
     this.authForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^\+\d{2}\s\(\d{2,}\)\s(\d-?){9}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -40,8 +35,8 @@ export class LoginPage implements OnInit {
     return this.getFormControlByName('name');
   }
 
-  get email(): FormControl {
-    return this.getFormControlByName('email');
+  get phone(): FormControl {
+    return this.getFormControlByName('phone');
   }
 
   get password(): FormControl {
@@ -68,8 +63,12 @@ export class LoginPage implements OnInit {
     return !isSignIn;
   }
 
-  onSubmit(): void {
-    this.store$.dispatch(show(null));
+  onSubmit(isSignIn: boolean): void {
     console.log(this.authForm.value);
+    if (!isSignIn) {
+      this.store$.dispatch(LoginActions.register({ register: this.authForm.value }));
+    } else {
+      this.store$.dispatch(LoginActions.login({ login: this.authForm.value }));
+    }
   }
 }

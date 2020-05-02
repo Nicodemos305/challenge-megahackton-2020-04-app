@@ -1,0 +1,198 @@
+<app-overlay-loading></app-overlay-loading>
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Dados Importantes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-thumbnail slot="start">
+        <img src="assets/wildlife.svg" />
+      </ion-thumbnail>
+      {{ question }}
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-content">
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+      <div [ngSwitch]="stage">
+        <div *ngSwitchCase="'name'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Nome e Sobrenome</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="create-outline"></ion-icon>
+                <ion-input formControlName="firstName" placeholder="Nome"></ion-input>
+              </ion-item>
+              <p>
+                <ion-note
+                  slot="end"
+                  color="danger"
+                  *ngIf="control('firstName').dirty && hasError('firstName', 'required')"
+                >
+                  Obrigatório
+                </ion-note>
+              </p>
+              <ion-item>
+                <ion-icon slot="start" name="create-outline"></ion-icon>
+                <ion-input formControlName="lastName" placeholder="Sobrenome"></ion-input>
+              </ion-item>
+              <p>
+                <ion-note
+                  slot="end"
+                  color="danger"
+                  *ngIf="control('lastName').touched && hasError('lastName', 'required')"
+                >
+                  Obrigatório
+                </ion-note>
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'genre'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Genêro</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="people-circle-outline"></ion-icon>
+                <ion-select formControlName="genre" placeholder="Selecione" style="width: 100%;">
+                  <ion-select-option value="f">Feminino</ion-select-option>
+                  <ion-select-option value="m">Masculino</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'dateOfBirth'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Data de Nascimento</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="happy-outline"></ion-icon>
+                <ion-datetime
+                  formControlName="dateOfBirth"
+                  displayFormat="DD/MM/YYYY"
+                  placeholder="Select Date"
+                ></ion-datetime>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'maritalStatus'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Estado Civil</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="people-outline"></ion-icon>
+                <ion-select
+                  formControlName="maritalStatus"
+                  placeholder="Selecione"
+                  style="width: 100%;"
+                >
+                  <ion-select-option value="1">Solteiro(a)</ion-select-option>
+                  <ion-select-option value="2">Casado(a)</ion-select-option>
+                  <ion-select-option value="3">Divorciado(a)</ion-select-option>
+                  <ion-select-option value="3">Viúvo(a)</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'email'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>E-mail</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="mail-outline"></ion-icon>
+                <ion-input formControlName="email" placeholder="email@email.com"></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'location'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>País, Estado e Cidade</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="navigate-outline"></ion-icon>
+                <ion-input formControlName="country" placeholder="País"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon slot="start" name="map-outline"></ion-icon>
+                <ion-input formControlName="state" placeholder="Estado"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon slot="start" name="locate-outline"></ion-icon>
+                <ion-input formControlName="city" placeholder="Cidade"></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <div *ngSwitchCase="'salary'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Renda (R$)</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                <ion-input
+                  formControlName="salary"
+                  separatorLimit="100.000.000,00"
+                  maxlength="17"
+                  mask="99999999999,00"
+                  placeholder="R$ 0,00"
+                ></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+      <ion-button color="tertiary" (click)="onSubmit()" [disabled]="userForm.invalid"
+        >Salvar</ion-button
+      >
+    </form>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar style="width: 100%; height: 100%; padding: 0;">
+      <ion-buttons slot="start">
+        <ion-button (click)="onNextPrevious(false)" [disabled]="!previous">
+          <ion-icon slot="start" name="arrow-back-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="onNextPrevious(true)" [disabled]="!next">
+          <ion-icon slot="end" name="arrow-forward-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

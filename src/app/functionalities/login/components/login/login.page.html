@@ -1,12 +1,12 @@
-<ion-content padding *ngIf="(registerLayout$ | async ) as state">
-  <h1 class="ion-text-center">
-    <ion-icon name="checkmark-done-outline" color="primary" class="icon-7em"></ion-icon>
-  </h1>
+<ng-container *ngIf="(registerLayout$ | async ) as state">
+  <div class="ion-center">
+    <ion-img src="assets/logo_branca.png"></ion-img>
+  </div>
 
-  <form [formGroup]="authForm" (submit)="onSubmit()">
+  <form [formGroup]="authForm" (submit)="onSubmit(state.isSignIn)">
     <ng-container *ngIf="onShowRegister(state.isSignIn)">
       <ion-item>
-        <ion-icon name="person" color="primary" slot="start"></ion-icon>
+        <ion-icon name="person" slot="start"></ion-icon>
         <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
         <ion-note slot="end" color="danger" *ngIf="name.dirty && name.hasError('required')">
           Required
@@ -17,25 +17,29 @@
       </ion-item>
     </ng-container>
 
+    <!-- Mobile phone -->
     <ion-item>
-      <ion-icon name="mail" color="primary" slot="start"></ion-icon>
+      <ion-icon name="call" slot="start"></ion-icon>
       <ion-input
-        type="email"
-        placeholder="E-mail"
-        formControlName="email"
-        inputmode="email"
-        autofocus="true"
+        type="text"
+        name="phone"
+        placeholder="+55 (00) 00000-0000"
+        formControlName="phone"
+        maxlength="19"
+        inputmode="tel"
+        prefix="+55 "
+        mask="(00) 00000-0000"
       ></ion-input>
-      <ion-note slot="end" color="danger" *ngIf="email.dirty && email.hasError('required')">
+      <ion-note slot="end" color="danger" *ngIf="phone.dirty && phone.hasError('required')">
         Required
       </ion-note>
-      <ion-note slot="end" color="danger" *ngIf="email.dirty && email.hasError('email')">
-        Invalid E-Mail
+      <ion-note slot="end" color="danger" *ngIf="phone.dirty && phone.hasError('pattern')">
+        Invalid Phone
       </ion-note>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="lock-closed" color="primary" slot="start"></ion-icon>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
       <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
       <ion-note slot="end" color="danger" *ngIf="password.dirty && password.hasError('required')">
         Required
@@ -45,7 +49,7 @@
       </ion-note>
     </ion-item>
 
-    <ion-button expand="block" type="submit" [disabled]="authForm.invalid">
+    <ion-button color="tertiary" expand="block" type="submit" [disabled]="authForm.invalid">
       {{ state.action }}
     </ion-button>
   </form>
@@ -53,4 +57,4 @@
   <ion-button expand="block" fill="clear" (click)="changeAuthAction(state.isSignIn)">
     {{ state.actionChange }}
   </ion-button>
-</ion-content>
+</ng-container>

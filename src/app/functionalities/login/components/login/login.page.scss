@@ -1,0 +1,30 @@
+@import '../../../../../theme/variables.scss';
+
+ion-button {
+  --background: var(--ion-color-primary);
+  color: #fff;
+}
+
+ion-input {
+  --background: var(--ion-color-primary);
+  color: #fff;
+}
+
+ion-icon {
+  --background: var(--ion-color-primary);
+  color: #fff;
+}
+
+ion-item {
+  --background: var(--ion-color-primary);
+  color: #fff;
+}
+
+.ion-center {
+  display: flex;
+  justify-content: center;
+}
+
+ion-img {
+  max-width: 15rem;
+}
