@@ -1,0 +1,33 @@
+<!-- List of Text Items -->
+<ng-container *ngIf="(spendings$ | async) as resultado">
+  <ion-item-sliding *ngFor="let item of resultado.lista">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/goals.svg">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>
+          Valor: R$ {{ item.value | mask: '999999999,00' }}
+        </p>
+        <p>
+          Data objetivo: {{ item.expectedDate | date: 'dd/MM/yyyy' }}
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option>
+        <ion-icon
+          name="trash-outline"
+          (click)="onDeleteSpending(item._id)"
+        ></ion-icon>
+      </ion-item-option>
+      <ion-item-option>
+        <ion-icon
+          name="create-outline"
+          (click)="presentModal(item)"
+        ></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ng-container>
