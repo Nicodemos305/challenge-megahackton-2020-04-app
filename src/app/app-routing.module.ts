@@ -32,6 +32,10 @@ const routes: Routes = [
       import('./functionalities/spending/spending.module').then((m) => m.SpendingPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'home',
+    loadChildren: () => import('./functionalities/home/home.module').then( m => m.HomePageModule)
+  },
 ];
 
 @NgModule({
