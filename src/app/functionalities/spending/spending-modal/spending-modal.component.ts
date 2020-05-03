@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as fromRoot from '@core/store/reducers';
 import { Store } from '@ngrx/store';
-import { createSpending } from '../actions/spending.actions';
+import { createSpending, updateSpending } from '../actions/spending.actions';
 import { Spending } from '../spending.model';
 
 @Component({
@@ -45,7 +45,14 @@ export class SpendingModalComponent implements OnInit {
     console.log(this.spendingForm.value);
     console.log(this.spendingForm.value.name);
     if (this.spendingForm.valid) {
-      this.store$.dispatch(createSpending({ spending: this.spendingForm.value }));
+      console.log(this.spending);
+      if (!this.spending) {
+        this.store$.dispatch(createSpending({ spending: this.spendingForm.value }));
+      } else {
+        const form = this.spendingForm.value;
+        form._id = this.spending._id;
+        this.store$.dispatch(updateSpending({ spending: form }));
+      }
     }
   }
 }

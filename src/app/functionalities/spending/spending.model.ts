@@ -1,4 +1,5 @@
 export class Spending {
+  _id: String;
   name: String;
   kind: Number;
   payday: Date;

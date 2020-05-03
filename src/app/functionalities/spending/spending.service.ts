@@ -27,7 +27,7 @@ export class SpendingService {
   }
 
   create(spending: Spending) {
-    return this.http.post(this.ENDPOINT.concat(`/spending`), spending, this.httpOptions);
+    return this.http.post(this.ENDPOINT.concat(`/spendings`), spending, this.httpOptions);
   }
 
   update(spending: Spending) {

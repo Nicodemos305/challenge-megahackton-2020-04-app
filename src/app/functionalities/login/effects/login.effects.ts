@@ -4,7 +4,7 @@ import { OverlayEnum } from '@app/core/models/overlay.model';
 import { AuthService } from '@app/core/services/auth.service';
 import { show } from '@app/core/store/actions/overlay.actions';
 import * as fromRoot from '@core/store/reducers';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { exhaustMap, map, tap } from 'rxjs/operators';
@@ -18,7 +18,8 @@ export class LoginEffects {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
   ) {}
 
   loginLayout$ = createEffect(
@@ -73,6 +74,7 @@ export class LoginEffects {
         tap(() => {
           console.log('LOGIN');
           // return this.navCtrl.navigateForward('');
+          this.modalCtrl.dismiss();
           return this.router.navigate(['/login']);
         })
       ),
@@ -134,6 +136,7 @@ export class LoginEffects {
         ofType(LoginActions.logout),
         tap(() => {
           // remove user from local storage to log user out
+          this.modalCtrl.dismiss();
           this.authService.logout();
           this.navCtrl.navigateForward('/login');
           this.store.dispatch(LoginActions.logoutSuccess());
