@@ -5,7 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginEffects } from './effects/login.effects';
 import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './components/login/login.page';
-import { LoginContainerPage } from './Login-container.page';
+import { LoginContainerPage } from './login-container.page';
 import { featureKey, reducer } from './reducers';
 import { NgxMaskIonicModule } from 'ngx-mask-ionic';
 import { ConfirmationPage } from './components/confirmation/confirmation.page';
