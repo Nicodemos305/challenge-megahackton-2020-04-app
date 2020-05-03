@@ -1,0 +1,48 @@
+<!-- List of Text Items -->
+<ion-list *ngIf="(spendings$ | async) as resultado">
+  <ion-item-sliding *ngFor="let item of resultado.lista">
+    <ion-item>
+      <ion-label>
+        <div class="container-list">
+          <div class="desc-data">
+            <span class="item1">{{ item.name }}</span>
+            <span class="item2">
+              <ion-label color="secondary">{{ item.kind }}</ion-label>
+            </span>
+            <span class="item2">{{ item.payday | date: 'dd/MM/yyyy' }}</span>
+          </div>
+          <span class="item3">
+            R$ {{ item.value | mask: '99999999,00' }}
+          </span>
+        </div>
+      </ion-label>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option>
+        <ion-icon
+          name="trash-outline"
+          (click)="onDeleteSpending(item._id)"
+        ></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+  <!-- <ion-item-sliding>
+    <ion-item>
+      <ion-label>
+        <div class="container-list">
+          <div class="desc-data">
+            <span class="item1">Comida</span>
+            <span class="item2">12/12/2012</span>
+          </div>
+          <span class="item3">R$ 45454554,45</span>
+        </div>
+      </ion-label>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option>
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding> -->
+</ion-list>

@@ -1,13 +1,16 @@
 import { environment } from '@env/environment';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import * as fromLogin from '@func/login/reducers';
+import * as fromSpending from '@func/spending/reducers';
 
 export interface State {
   login: fromLogin.State;
+  spending: fromSpending.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   login: fromLogin.reducer,
+  spending: fromSpending.reducer,
 };
 
 // console.log all actions

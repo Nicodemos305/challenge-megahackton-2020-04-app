@@ -4,7 +4,7 @@ import * as fromRoot from '@core/store/reducers';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { exhaustMap, tap } from 'rxjs/operators';
-import { show } from '../actions/overlay.actions';
+import { show, showToast } from '../actions/overlay.actions';
 
 @Injectable()
 export class OverlayEffects {
@@ -23,6 +23,17 @@ export class OverlayEffects {
         ofType(show),
         exhaustMap((action) =>
           this.overlayService.show(action.overlay).pipe(tap((o) => o.present()))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  showToast$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(showToast),
+        exhaustMap((action) =>
+          this.overlayService.showToast(action.overlayOptions).pipe(tap((o) => o.present()))
         )
       ),
     { dispatch: false }

@@ -18,6 +18,10 @@ import { LoadingInterceptor } from '../helpers/loading.interceptor';
 import { AuthService } from '../services/auth.service';
 import { OverlayEffects } from '../store/effects/overlay.effects';
 import { metaReducers, reducers } from '../store/reducers';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   imports: [

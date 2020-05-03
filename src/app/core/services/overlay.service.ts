@@ -26,6 +26,17 @@ export class OverlayService {
   }
 
   /**
+   * Show Toast
+   * @param options
+   */
+  showToast(options: ToastOptions): Observable<HTMLIonToastElement> {
+    const overlay = new OverlayOptions();
+    overlay.overlayType = OverlayEnum.Toast;
+    overlay.overlayOptions = options;
+    return <Observable<HTMLIonToastElement>>this.show(overlay);
+  }
+
+  /**
    * Default method to show temporary mensage types: OverlayEnum
    *
    * @typedef OverlayOptions
