@@ -56,6 +56,27 @@ export class SpendingEffects {
     )
   );
 
+  updateSpending$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SpendingActions.updateSpending),
+      exhaustMap((action) => {
+        return this.service.update(action.spending).pipe(
+          map((resultado) => {
+            this.modalCtrl.dismiss();
+            this.store.dispatch(
+              showToast({
+                overlayOptions: {
+                  message: 'Despesa atualizada!',
+                },
+              })
+            );
+            return SpendingActions.listSpending();
+          })
+        );
+      })
+    )
+  );
+
   deleteSpendingById = createEffect(() =>
     this.actions$.pipe(
       ofType(SpendingActions.deleteSpendingById),

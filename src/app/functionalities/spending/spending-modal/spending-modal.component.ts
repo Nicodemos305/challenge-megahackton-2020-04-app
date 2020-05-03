@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as fromRoot from '@core/store/reducers';
 import { Store } from '@ngrx/store';
 import { createSpending } from '../actions/spending.actions';
+import { Spending } from '../spending.model';
 
 @Component({
   selector: 'app-spending-modal',
@@ -11,7 +12,7 @@ import { createSpending } from '../actions/spending.actions';
   styleUrls: ['./spending-modal.component.scss'],
 })
 export class SpendingModalComponent implements OnInit {
-  @Input() spending;
+  @Input() spending: Spending;
 
   spendingForm: FormGroup;
 
@@ -25,9 +26,15 @@ export class SpendingModalComponent implements OnInit {
     this.spendingForm = this.fb.group({
       name: ['', [Validators.required]],
       kind: ['', [Validators.required]],
-      payday: [new Date().toJSON(), [Validators.required]],
+      payday: ['', [Validators.required]],
       value: ['', [Validators.required]],
     });
+    if (this.spending) {
+      this.spendingForm.patchValue({ name: this.spending.name });
+      this.spendingForm.patchValue({ kind: this.spending.kind });
+      this.spendingForm.patchValue({ payday: new Date(this.spending.payday).toJSON() });
+      this.spendingForm.patchValue({ value: this.spending.value.toString().replace('.', ',') });
+    }
   }
 
   onDissmis() {
