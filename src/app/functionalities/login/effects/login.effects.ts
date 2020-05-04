@@ -59,9 +59,7 @@ export class LoginEffects {
       this.actions$.pipe(
         ofType(LoginActions.loginSuccess),
         tap(() =>
-          this.navCtrl.navigateForward(
-            this.route.snapshot.queryParamMap.get('redirect') || '/profile'
-          )
+          this.navCtrl.navigateForward(this.route.snapshot.queryParamMap.get('redirect') || '/home')
         )
       ),
     { dispatch: false }
