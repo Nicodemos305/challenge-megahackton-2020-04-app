@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { HomeService } from './home.service';
-import { Moment } from 'moment'; // add this 1 of 4
 import * as moment from 'moment';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
+import * as fromRoot from '@core/store/reducers';
+import { Store } from '@ngrx/store';
+import { selectFeature } from './reducers';
+import { DepositComponent } from '../deposit/deposit.component';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +19,14 @@ export class HomePage implements OnInit {
   public goals: any;
   public resultado$: any;
   public urlPork: string;
+  private updateHome$ = this.store.select(selectFeature);
 
-  constructor(private homeService: HomeService, private navCtrl: NavController) {}
+  constructor(
+    private homeService: HomeService,
+    private navCtrl: NavController,
+    private store: Store<fromRoot.State>,
+    public modalController: ModalController
+  ) {}
 
   calcaMonth(goal) {
     let months = moment(goal.expectedDate).diff(moment(goal.insertedAt), 'months', true);
@@ -42,14 +51,29 @@ export class HomePage implements OnInit {
       return 'assets/majin_boo.png';
     }
   }
+
   ngOnInit() {
-    this.resultado$ = this.homeService.goalForecast();
-    this.extrato = this.homeService.financialHistory();
+    this.updateHome$.subscribe((r) => {
+      console.log('Result', r);
+      this.init();
+    });
+  }
+
+  private init(): void {
     console.log(JSON.stringify(this.extrato));
     this.urlPork = this.getPork(1200);
+    this.resultado$ = this.homeService.goalForecast();
+    this.extrato = this.homeService.financialHistory();
   }
 
   onAbrirTela(pagina: string) {
     this.navCtrl.navigateForward(pagina);
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: DepositComponent,
+    });
+    modal.present().then((r) => console.log(r));
   }
 }

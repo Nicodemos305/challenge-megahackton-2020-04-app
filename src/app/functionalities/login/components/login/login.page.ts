@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
   private createForm(): void {
     this.authForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern(/^\+\d{2}\s\(\d{2,}\)\s(\d-?){9}$/)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     });
   }
 

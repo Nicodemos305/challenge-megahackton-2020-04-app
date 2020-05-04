@@ -5,6 +5,7 @@ import * as fromRoot from '@core/store/reducers';
 import { Store } from '@ngrx/store';
 import { createSpending, updateSpending } from '../actions/spending.actions';
 import { Spending } from '../spending.model';
+import { update } from '@app/functionalities/home/actions/home.actions';
 
 @Component({
   selector: 'app-spending-modal',
@@ -53,6 +54,7 @@ export class SpendingModalComponent implements OnInit {
         form._id = this.spending._id;
         this.store$.dispatch(updateSpending({ spending: form }));
       }
+      this.store$.dispatch(update({ page: 'spending' }));
     }
   }
 }

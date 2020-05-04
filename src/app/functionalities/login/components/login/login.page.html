@@ -40,7 +40,12 @@
 
     <ion-item>
       <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      <ion-input
+        type="password"
+        maxlength="16"
+        placeholder="Password"
+        formControlName="password"
+      ></ion-input>
       <ion-note slot="end" color="danger" *ngIf="password.dirty && password.hasError('required')">
         Required
       </ion-note>
