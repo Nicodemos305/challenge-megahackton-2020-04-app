@@ -1,22 +1,17 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Despesas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <app-spending-list></app-spending-list>
   <!-- fab placed in the center of the content with a list on each side -->
-  <ion-fab
-    horizontal="end"
-    vertical="bottom"
-    slot="fixed"
-  >
-    <ion-fab-button
-      color="danger"
-      (click)="presentModal()"
-    >
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger" (click)="presentModal()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

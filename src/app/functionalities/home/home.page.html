@@ -41,7 +41,7 @@
             <ion-col size="9">
               Boa tarde, sou Pigmoney e irei ajudar você a guardar dinheiro.
               <br />
-              Seu saldo é R$ {{ resultado.result.extract }}
+              Seu saldo é {{ resultado.result.extract | currency:'BRL' }}
             </ion-col>
           </ion-row>
         </ion-grid>
