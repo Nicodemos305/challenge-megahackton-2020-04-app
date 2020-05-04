@@ -24,6 +24,11 @@ export class HomePage implements OnInit {
     return Math.round(months);
   }
 
+  calcDays(goal) {
+    let days = moment(goal.expectedDate).diff(moment(goal.insertedAt), 'days', true);
+    // return goal.value / months;
+    return Math.round(days);
+  }
   ngOnInit() {
     this.resultado$ = this.homeService.goalForecast();
     this.extrato = this.homeService.financialHistory();
