@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
   public extrato: any;
   public goals: any;
   public resultado$: any;
+  public urlPork: string;
 
   constructor(private homeService: HomeService, private navCtrl: NavController) {}
 
@@ -29,9 +30,23 @@ export class HomePage implements OnInit {
     // return goal.value / months;
     return Math.round(days);
   }
+
+  getPork(extract){
+    if(extract  < 800){
+      return "assets/magro.png";
+    }else if(extract > 800 && extract <= 1200){
+      return"assets/medio.png";
+    }else if(extract > 1200 && extract < 2000){
+      return"assets/gordo.png";
+    }else if(extract > 2000){
+      return  "assets/majin_boo.png";
+    }
+  }
   ngOnInit() {
     this.resultado$ = this.homeService.goalForecast();
     this.extrato = this.homeService.financialHistory();
+    console.log(JSON.stringify(this.extrato));
+    this.urlPork = this.getPork(1200);
   }
 
   onAbrirTela(pagina: string) {
