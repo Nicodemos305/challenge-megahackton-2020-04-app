@@ -121,9 +121,48 @@
         <ion-row *ngFor="let item of resultado.result.goalsNotReachable">
           <ion-item>
             <ion-col size="12">
-              <ion-label>{{calcaMonth(item)}}</ion-label>
+              <ion-label>{{calcaMonth(item)}} mês/meses</ion-label>
               <ion-label color="primary">
                 {{item.value / calcaMonth(item) | currency:"BRL"}}
+              </ion-label>
+              para realizar
+              <span class="bold">{{item.name}}</span>
+            </ion-col>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4"></ion-col>
+          <ion-col size="4">
+            <ion-img src="{{getPork(resultado.result.extract)}}"></ion-img>
+          </ion-col>
+          <ion-col size="4"></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="full" color="secondary" type="submit"
+              >Alimente o porquinho</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <h4>Quanto investir por dia</h4>
+        </ion-row>
+        <ion-row *ngFor="let item of resultado.result.goalsNotReachable">
+          <ion-item>
+            <ion-col size="12">
+              <ion-label>{{calcDays(item)}} dia(s)</ion-label>
+              <ion-label color="primary">
+                {{item.value / calcDays(item) | currency:"BRL"}}
               </ion-label>
               para realizar
               <span class="bold">{{item.name}}</span>
@@ -138,6 +177,11 @@
     <ion-toolbar>
       <ion-tabs>
         <ion-tab-bar slot="bottom">
+          <ion-tab-button (click)="onAbrirTela('home')">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-tab-button>
+
           <ion-tab-button (click)="onAbrirTela('goals')">
             <ion-icon name="checkmark-circle"></ion-icon>
             <ion-label>Objetivos</ion-label>
@@ -152,10 +196,6 @@
           <ion-tab-button (click)="onAbrirTela('investiments')" disabled>
             <ion-icon name="trending-up"></ion-icon>
             <ion-label>Investimentos</ion-label>
-          </ion-tab-button>
-          <ion-tab-button (click)="onAbrirTela('conquest')">
-            <ion-icon name="flag"></ion-icon>
-            <ion-label>Conquistas</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
       </ion-tabs>
