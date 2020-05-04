@@ -15,7 +15,7 @@ export class DepositService {
   constructor(private http: HttpClient) {}
 
   depositFinancialAccount(deposit: { deposit: number }) {
-    return this.http.post(
+    return this.http.put(
       this.ENDPOINT.concat('/depositFinancialAccount'),
       deposit,
       this.httpOptions
