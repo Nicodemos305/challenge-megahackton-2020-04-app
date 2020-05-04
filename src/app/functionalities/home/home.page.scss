@@ -1,0 +1,22 @@
+.bold {
+  font-weight: bold;
+}
+
+.item-container {
+  width: 100%;
+}
+
+.item-extrato {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: space-between;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.item-extrato1 {
+  font-size: 11px;
+  text-align: right;
+}
