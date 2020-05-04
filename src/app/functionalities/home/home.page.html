@@ -121,51 +121,9 @@
         <ion-row *ngFor="let item of resultado.result.goalsNotReachable">
           <ion-item>
             <ion-col size="12">
-              <ion-label>{{calcaMonth(item)}} mês/meses</ion-label>
+              <ion-label>{{calcaMonth(item)}}</ion-label>
               <ion-label color="primary">
                 {{item.value / calcaMonth(item) | currency:"BRL"}}
-              </ion-label>
-              para realizar
-              <span class="bold">{{item.name}}</span>
-            </ion-col>
-          </ion-item>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-
-    <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4"></ion-col>
-          <ion-col  size="4">
-            <ion-img src="assets/magro.png"></ion-img>
-          </ion-col>
-          <ion-col size="4"></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button
-            expand="full"
-            color="secondary"
-            type="submit"
-          >Alimente o porquinho</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-   
-    </ion-item>
-
-    <ion-item>
-      <ion-grid>
-        <ion-row>
-          <h4>Quanto investir por dia</h4>
-        </ion-row>
-        <ion-row *ngFor="let item of resultado.result.goalsNotReachable">
-          <ion-item>
-            <ion-col size="12">
-              <ion-label>{{calcDays(item)}} dia(s)</ion-label>
-              <ion-label color="primary">
-                {{item.value / calcDays(item) | currency:"BRL"}}
               </ion-label>
               para realizar
               <span class="bold">{{item.name}}</span>

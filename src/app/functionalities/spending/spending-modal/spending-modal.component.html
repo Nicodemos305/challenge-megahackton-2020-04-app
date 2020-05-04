@@ -7,26 +7,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <form
-    [formGroup]="spendingForm"
-    (submit)="onSalvar()"
-  >
+  <form [formGroup]="spendingForm" (submit)="onSalvar()">
     <ion-item>
-      <ion-icon
-        slot="start"
-        name="menu"
-      ></ion-icon>
-      <ion-input
-        type="text"
-        placeholder="Nome despesa"
-        formControlName="name"
-      ></ion-input>
+      <ion-icon slot="start" name="menu"></ion-icon>
+      <ion-input type="text" placeholder="Nome despesa" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-icon
-        slot="start"
-        name="cash-outline"
-      ></ion-icon>
+      <ion-icon slot="start" name="cash-outline"></ion-icon>
       <ion-input
         placeholder="Valor despesa"
         formControlName="value"
@@ -36,21 +23,29 @@
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-icon
-        slot="start"
-        name="pricetag"
-      ></ion-icon>
-      <ion-input
-        type="text"
-        placeholder="Tipo despesa"
-        formControlName="kind"
-      ></ion-input>
+      <ion-icon slot="start" name="pricetag"></ion-icon>
+      <ion-select formControlName="kind" placeholder="Tipo despesa">
+        <ion-select-option value="Alimentação">Alimentação</ion-select-option>
+        <ion-select-option value="Lazer">Lazer</ion-select-option>
+        <ion-select-option value="Transporte">Transporte</ion-select-option>
+        <ion-select-option value="Saúde">Saúde</ion-select-option>
+        <ion-select-option value="Cuidados pessoais">Cuidados pessoais</ion-select-option>
+        <ion-select-option value="Combustível">Combustível</ion-select-option>
+        <ion-select-option value="Estacionamento">Estacionamento</ion-select-option>
+        <ion-select-option value="Água">Água</ion-select-option>
+        <ion-select-option value="Luz">Luz</ion-select-option>
+        <ion-select-option value="Gás">Gás</ion-select-option>
+        <ion-select-option value="Vestuário">Vestuário</ion-select-option>
+        <ion-select-option value="Cuidados com pet ">Cuidados com pet</ion-select-option>
+        <ion-select-option value="Alimentação pet  ">Alimentação pet </ion-select-option>
+        <ion-select-option value="Aluguel">Aluguel</ion-select-option>
+        <ion-select-option value="Condominio">Condominio</ion-select-option>
+        <ion-select-option value="Educação">Educação</ion-select-option>
+        <ion-select-option value="Cartão de crédito">Cartão de crédito</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-icon
-        slot="start"
-        name="calendar"
-      ></ion-icon>
+      <ion-icon slot="start" name="calendar"></ion-icon>
       <ion-datetime
         type="text"
         placeholder="Data da despesa"
@@ -58,12 +53,7 @@
         formControlName="payday"
       ></ion-datetime>
     </ion-item>
-    <ion-button
-      expand="full"
-      color="secondary"
-      type="submit"
-      [disabled]="spendingForm.invalid"
-    >
+    <ion-button expand="full" color="secondary" type="submit" [disabled]="spendingForm.invalid">
       Salvar
     </ion-button>
   </form>
