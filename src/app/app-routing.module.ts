@@ -38,6 +38,11 @@ const routes: Routes = [
       import('./functionalities/goals/goals.module').then((m) => m.GoalsPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'home',
+    loadChildren: () => import('./functionalities/home/home.module').then((m) => m.HomePageModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

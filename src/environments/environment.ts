@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_REST: 'http://localhost:8100',
+  API_REST: 'http://localhost:3333',
   API_PATH: '/api/v1',
   LOADING_HEADER: 'Show-Loading',
 };
