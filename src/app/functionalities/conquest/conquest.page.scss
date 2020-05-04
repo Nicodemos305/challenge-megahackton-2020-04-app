@@ -1,0 +1,23 @@
+ion-col {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+ion-row {
+  border-bottom: 1px solid #cecece;
+}
+
+.empty-conquest {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.empty-conquest img {
+  width: 64px;
+  height: 64px;
+}

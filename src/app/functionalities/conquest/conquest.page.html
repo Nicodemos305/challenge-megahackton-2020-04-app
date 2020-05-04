@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Conquistas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="(conquests$ | async)?.result; then lista else vazio"></div>
+
+  <ng-template #vazio>
+    <div class="empty-conquest">
+      <img src="assets/medal.svg" />
+      Nenhuma conquista no momento
+    </div>
+  </ng-template>
+
+  <ng-template #lista>
+    <ion-grid>
+      <ion-row *ngFor="let item of (conquests$ | async)?.result">
+        <ion-col>
+          <img src="assets/medal.svg" />
+        </ion-col>
+        <ion-col size="10">
+          {{ item.name }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+</ion-content>

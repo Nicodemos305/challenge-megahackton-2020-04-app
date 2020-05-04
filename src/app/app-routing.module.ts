@@ -42,7 +42,11 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./functionalities/home/home.module').then((m) => m.HomePageModule),
     canActivate: [AuthGuard],
+  },  {
+    path: 'conquest',
+    loadChildren: () => import('./functionalities/conquest/conquest.module').then( m => m.ConquestPageModule)
   },
+
 ];
 
 @NgModule({
