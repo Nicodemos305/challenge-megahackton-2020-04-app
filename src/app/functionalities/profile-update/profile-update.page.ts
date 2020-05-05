@@ -32,16 +32,16 @@ export class ProfileUpdatePage implements OnInit {
   ngOnInit() {
     this.initNextPrevious();
     this.userForm = this.fb.group({
-      firstName: ['Bruno', Validators.required],
+      firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      genre: ['m'],
-      dateOfBirth: [new Date('2016-04-19T18:03:40.887').toJSON()],
-      maritalStatus: ['2'],
-      email: [''],
+      genre: [''],
+      dateOfBirth: ['', Validators.required],
+      maritalStatus: [''],
+      email: ['', Validators.required],
       country: [''],
       state: [''],
       city: [''],
-      salary: [''],
+      salary: ['', Validators.required],
     });
   }
 

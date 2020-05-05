@@ -46,8 +46,11 @@ export class LoginEffects {
       exhaustMap((action) =>
         this.authService.login(action.login).pipe(
           map((result) => {
+            console.log(result);
             this.authService.saveLoginStorage(result);
-            return LoginActions.loginSuccess();
+            return LoginActions.loginSuccess({
+              createdUser: result.createdUser,
+            });
           })
         )
       )
@@ -58,9 +61,13 @@ export class LoginEffects {
     () =>
       this.actions$.pipe(
         ofType(LoginActions.loginSuccess),
-        tap(() =>
-          this.navCtrl.navigateForward(this.route.snapshot.queryParamMap.get('redirect') || '/home')
-        )
+        tap((result) => {
+          let rota = '/profile-update';
+          if (result.createdUser) {
+            rota = '/home';
+          }
+          this.navCtrl.navigateForward(this.route.snapshot.queryParamMap.get('redirect') || rota);
+        })
       ),
     { dispatch: false }
   );
@@ -95,7 +102,9 @@ export class LoginEffects {
                 },
               })
             );
-            return LoginActions.confirmationRegister({ confirmation: result.result });
+            const confirmation = result.result;
+            confirmation.password = action.register.password;
+            return LoginActions.confirmationRegister({ confirmation });
           })
         )
       )
@@ -109,7 +118,12 @@ export class LoginEffects {
         console.log(action);
         return this.authService.confirmation(action.confirm).pipe(
           map((r) => {
-            return LoginActions.successConfirmationCode();
+            return LoginActions.successConfirmationCode({
+              login: {
+                phone: action.confirm.phone,
+                password: action.confirm.password,
+              },
+            });
           })
         );
       })
@@ -120,12 +134,18 @@ export class LoginEffects {
     () =>
       this.actions$.pipe(
         ofType(LoginActions.successConfirmationCode),
-        tap((r) => {
-          console.log(r);
-          return this.navCtrl.navigateForward('/profile');
+        map((r) => {
+          return LoginActions.login({
+            login: {
+              phone: r.login.phone,
+              password: r.login.password,
+              createdUser: false,
+            },
+          });
         })
-      ),
-    { dispatch: false }
+      )
+    // ,
+    //     { dispatch: false }
   );
 
   logout$ = createEffect(

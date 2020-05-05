@@ -59,7 +59,7 @@ export class ProfileUpdateEffects {
               },
             })
           );
-          this.navCtrl.navigateForward('/profile');
+          this.navCtrl.navigateForward('/home');
         })
       ),
     { dispatch: false }

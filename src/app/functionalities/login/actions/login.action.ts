@@ -15,7 +15,10 @@ export const register = createAction('[Login] Register', props<{ register: Regis
 // submit user credential
 export const login = createAction('[Login] Login', props<{ login: Login }>());
 // login success
-export const loginSuccess = createAction('[Login] Login Success');
+export const loginSuccess = createAction(
+  '[Login] Login Success',
+  props<{ createdUser: boolean }>()
+);
 // login redirect
 export const loginRedirect = createAction('[Login] Login Redirect');
 // logout
@@ -33,4 +36,7 @@ export const confirmationCode = createAction(
   props<{ confirm: any }>()
 );
 // confirmation success code
-export const successConfirmationCode = createAction('[Login] Success Confirmation Code');
+export const successConfirmationCode = createAction(
+  '[Login] Success Confirmation Code',
+  props<{ login: any }>()
+);

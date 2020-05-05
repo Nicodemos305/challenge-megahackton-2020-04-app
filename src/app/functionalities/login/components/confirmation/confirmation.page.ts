@@ -33,7 +33,13 @@ export class ConfirmationPage implements OnInit {
 
   onConfirmation() {
     if (this.confirmForm.valid) {
-      this.store$.dispatch(confirmationCode({ confirm: this.confirmForm.value }));
+      const login = {
+        phone: this.confirmation.phone,
+        password: this.confirmation.password,
+      };
+      const confirm = this.confirmForm.value;
+      confirm.password = this.confirmation.password;
+      this.store$.dispatch(confirmationCode({ confirm }));
     }
   }
 }
